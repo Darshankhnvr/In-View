@@ -1,0 +1,16 @@
+import { defineSchema, defineTable } from "convex/server";
+import { v } from "convex/values";
+
+export default defineSchema({
+    users: defineTable ({
+        name: v.string(),
+        email: v.string(),
+        image: v.optional(v.string()),
+        role: v.union(v.literal("candidate"), v.literal("interviewer")), // cadidate or recruiter
+        clerkId: v.string(),
+        
+    
+    }).index("by_clerk_id", ["clerkId"]),
+})
+
+// https://calm-muskrat-55.clerk.accounts.dev
