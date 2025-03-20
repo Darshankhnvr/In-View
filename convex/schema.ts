@@ -1,5 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import { EndpointMessageOutSerializer } from "svix/dist/models/endpointMessageOut";
 
 export default defineSchema({
     users: defineTable ({
@@ -11,6 +12,30 @@ export default defineSchema({
         
     
     }).index("by_clerk_id", ["clerkId"]),
+
+    interviews : defineTable({
+        title: v.string(),
+        description: v.optional(v.string()),
+        startTime: v.number(),
+        endTime:v.optional(v.number()) ,
+        status: v.string(),
+        streamCallerId: v.string(),
+        candidateId: v.string(),
+        interviewerId: v.string(),
+            
+        
+    }).index("by_candidate_id", ["candidateId"])
+    .index("by_interviewer_id", ["interviewerId"]),
+
+    comments: defineTable({
+        content: v.string(),
+        rating : v.string(),
+        interviewerId: v.string(),
+        interviewId: v.string(),
+    }).index("by_interview_id", ["interviewId"]),
+
+
 })
 
 // https://calm-muskrat-55.clerk.accounts.dev
+

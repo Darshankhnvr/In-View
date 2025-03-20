@@ -7,10 +7,10 @@ export default function Home() {
   return (
     <div className="m-10">
       <SignedOut>
-        <SignInButton />
-        {/* <SignUpButton /> */}
-
-
+        <Button>
+          <SignInButton />
+          {/* <SignUpButton /> */}
+        </Button>
       </SignedOut>
       <SignedIn>
         <UserButton />
