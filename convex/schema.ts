@@ -1,6 +1,7 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 import { EndpointMessageOutSerializer } from "svix/dist/models/endpointMessageOut";
+import { mutation } from "./_generated/server";
 
 export default defineSchema({
     users: defineTable ({
@@ -13,19 +14,18 @@ export default defineSchema({
     
     }).index("by_clerk_id", ["clerkId"]),
 
-    interviews : defineTable({
+    interviews: defineTable({
         title: v.string(),
         description: v.optional(v.string()),
         startTime: v.number(),
-        endTime:v.optional(v.number()) ,
+        endTime: v.optional(v.number()),
         status: v.string(),
-        streamCallerId: v.string(),
+        streamCallId: v.string(),
         candidateId: v.string(),
-        interviewerId: v.string(),
-            
-        
-    }).index("by_candidate_id", ["candidateId"])
-    .index("by_interviewer_id", ["interviewerId"]),
+        interviewerIds: v.array(v.string()),
+      })
+        .index("by_candidate_id", ["candidateId"])
+        .index("by_stream_call_id", ["streamCallId"]),
 
     comments: defineTable({
         content: v.string(),
@@ -36,6 +36,7 @@ export default defineSchema({
 
 
 })
+
 
 // https://calm-muskrat-55.clerk.accounts.dev
 
